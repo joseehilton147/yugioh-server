@@ -1,0 +1,199 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "Yugioh API"
+	},
+	"host": "localhost:5000",
+	"basePath": "/",
+	"paths": {
+		"/database/version": {
+			"get": {
+				"tags": ["Database"],
+				"summary": "Check version of local database",
+				"produces": ["application/json"],
+				"responses": {
+					"200": {
+						"description": "Database version"
+					}
+				}
+			}
+		},
+		"/database/update": {
+			"post": {
+				"tags": ["Database"],
+				"summary": "Update local database version with YGOPRODECK API",
+				"produces": ["application/json"],
+				"responses": {
+					"200": {
+						"description": "Database version updated"
+					}
+				}
+			}
+		},
+		"/images/artwork/sync/yugipedia": {
+			"post": {
+				"tags": ["Images"],
+				"summary": "Sync local images with YGOPRODECK API",
+				"produces": ["application/json"],
+				"responses": {
+					"200": {
+						"description": "Images synced"
+					}
+				}
+			}
+		},
+		"/images/artwork/:cardName/yugipedia": {
+			"get": {
+				"tags": ["Images"],
+				"summary": "Get artwork from yugipedia using scrapper",
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "cardName",
+						"in": "path",
+						"description": "Card name",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Image"
+					}
+				}
+			}
+		},
+		"/images/no-artwork/:name": {
+			"get": {
+				"tags": ["Images"],
+				"summary": "Get all cards without artwork",
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "name",
+						"in": "path",
+						"description": "Card name",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Image"
+					}
+				}
+			}
+		},
+		"/images/upload": {
+			"post": {
+				"tags": ["Images"],
+				"summary": "Upload all card images from YGOPRODECK CDN to our CDN",
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "image",
+						"in": "formData",
+						"description": "Image",
+						"required": true,
+						"type": "file"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Image uploaded"
+					}
+				}
+			}
+		},
+		"/cards/": {
+			"get": {
+				"tags": ["Cards"],
+				"summary": "Get all cards",
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "next",
+						"in": "query",
+						"description": "Next page key",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "previous",
+						"in": "query",
+						"description": "Previous page key",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"description": "Limit of cards per page",
+						"required": false,
+						"type": "integer"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Card"
+					}
+				}
+			}
+		},
+		"/cards/search/:value": {
+			"get": {
+				"tags": ["Cards"],
+				"summary": "Search cards by name or id",
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "value",
+						"in": "path",
+						"description": "Card name or id",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Card"
+					}
+				}
+			}
+		},
+		"/cards/sync": {
+			"post": {
+				"tags": ["Cards"],
+				"summary": "Sync local cards with YGOPRODECK API",
+				"produces": ["application/json"],
+				"responses": {
+					"200": {
+						"description": "Cards synced"
+					}
+				}
+			}
+		},
+		"/cards/:id": {
+			"delete": {
+				"tags": ["Cards"],
+				"summary": "Delete card by id",
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "Card id",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Card deleted"
+					}
+				}
+			}
+		}
+	}
+}
