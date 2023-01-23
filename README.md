@@ -1,1 +1,3 @@
-# yugioh-server
+# YUGIOH API
+
+## UNDER DEVELOPMENT
