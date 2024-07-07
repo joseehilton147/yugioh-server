@@ -9,10 +9,6 @@ const defaultConfig = {
 	},
 	MONGO: {
 		URL: process.env.MONGO_DB,
-		CONFIG: {
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-		},
 	},
 	IMAGE_KIT: {
 		id: process.env.ID,

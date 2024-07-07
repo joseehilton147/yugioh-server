@@ -12,14 +12,14 @@ const mongoose = require('mongoose')
 const helmet = require('helmet')
 const cors = require('cors')
 
-mongoose.connect(config.MONGO.URL, config.MONGO.CONFIG, error => {
-	if (error) {
-		console.error('mongoDB connection error: ', error)
-		process.exit()
-	}
-
-	console.log('MongoDB connected with success.')
-})
+mongoose.connect(config.MONGO.URL, config.MONGO.CONFIG)
+  .then(() => {
+    console.log('MongoDB connected with success.');
+  })
+  .catch(error => {
+    console.error('mongoDB connection error:', error);
+    process.exit(1);
+  });
 
 // API Security (https://helmetjs.github.io)
 app.use(helmet())
